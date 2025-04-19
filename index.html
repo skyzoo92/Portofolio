@@ -38,6 +38,31 @@
       color: var(--text);
       transition: background 0.3s, color 0.3s;
     }
+    
+    .contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  background: var(--accent);
+  background-image: var(--icon);
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 24px 24px;
+  padding-left: 44px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.3s;
+}
+
+   .contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
 
     .sidebar-toggle {
       position: fixed;
@@ -65,14 +90,14 @@
     }
 
     .hamburger.open span:nth-child(1) {
-  transform: rotate(45deg) translateY(8px);
-}
-   .hamburger.open span:nth-child(2) {
-  opacity: 0;
-}
-   .hamburger.open span:nth-child(3) {
-  transform: rotate(-45deg) translateY(-8px);
-}
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
 
     .sidebar {
       position: fixed;
@@ -165,10 +190,10 @@
       color: var(--text);
       transition: background 0.3s;
     }
-    
-   .mode-toggle img {
-  transition: filter 0.3s ease;
-}
+
+    .mode-toggle img {
+      transition: filter 0.3s ease;
+    }
 
     .mode-toggle {
       position: fixed;
@@ -183,6 +208,52 @@
       cursor: pointer;
       transition: background 0.3s, color 0.3s;
     }
+
+    /* Tentang Saya Tambahan */
+    .about-card {
+      background: var(--status-bg);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      border-radius: 12px;
+    }
+
+    .about-card h2 {
+      margin-bottom: 1rem;
+    }
+
+    .skill {
+      margin-bottom: 1rem;
+    }
+
+    .skill span {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: bold;
+    }
+
+    .progress {
+      width: 100%;
+      background: #ccc;
+      height: 12px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      animation: fillBar 2s forwards;
+    }
+
+    .bar.html { width: 30%; }
+    .bar.css { width: 10%; }
+    .bar.js { width: 90%; }
+
+    @keyframes fillBar {
+      from { width: 0%; }
+      to { }
+    }
   </style>
 </head>
 <body>
@@ -195,8 +266,8 @@
   </button>
 
   <button class="mode-toggle" onclick="toggleMode()" title="Ganti Mode">
-  <img id="mode-icon" src="https://cdn-icons-png.flaticon.com/512/4814/4814730.png" alt="Mode Icon" width="24" />
-</button>
+    <img id="mode-icon" src="https://cdn-icons-png.flaticon.com/512/4814/4814730.png" alt="Mode Icon" width="24" />
+  </button>
 
   <div class="sidebar" id="sidebar">
     <h2>Portofolio</h2>
@@ -207,7 +278,7 @@
 
   <div class="status-bar">
     <span id="battery-level">Baterai: --%</span>
-    <span id="time">Waktu: --:--:-- WIB</span>
+    <span id="time">Waktu: --:-- WIB</span>
   </div>
 
   <main class="content">
@@ -215,55 +286,90 @@
       <div class="welcome">
         <img src="https://files.catbox.moe/wh6fiv.jpg" alt="Foto Profil" />
         <h1>Halo, Saya Hydra</h1>
-        <p>Selamat datang di portofolio pribadi saya. Di sini kamu bisa mengenal saya lebih jauh!</p>
+        <p>Selamat datang di website pribadi saya. Di sini kamu bisa mengenal saya lebih jauh!</p>
       </div>
     </section>
+
     <section id="about">
       <h1>Tentang Saya</h1>
-      <p>Saya adalah seorang yang bersemangat dalam dunia [bidang kamu], dengan keahlian di [skill kamu]. Saya suka menciptakan sesuatu yang menarik, efisien, dan berguna.</p>
+      <p>Saya adalah seorang siswa smk berjurusan akuntansi yang bersemangat dalam dunia pengembangan web, dengan keahlian di HTML, CSS, dan JavaScript. Saya suka menciptakan sesuatu yang menarik, efisien, dan berguna.</p>
+
+      <div class="about-card">
+        <h2>Hobi & Ketertarikan</h2>
+        <ul>
+          <li>Membuat website interaktif</li>
+          <li>Belajar JavaScript Bot WhatsApp</li>
+          <li>Bermain game dan menonton anime</li>
+        </ul>
+      </div>
+
+      <div class="about-card">
+        <h2>Kemampuan Saya</h2>
+        <div class="skill">
+          <span>HTML</span>
+          <div class="progress"><div class="bar html"></div></div>
+        </div>
+        <div class="skill">
+          <span>CSS</span>
+          <div class="progress"><div class="bar css"></div></div>
+        </div>
+        <div class="skill">
+          <span>JavaScript</span>
+          <div class="progress"><div class="bar js"></div></div>
+        </div>
+      </div>
     </section>
-    <section id="contact">
-      <h1>Kontak</h1>
-      <p>Email: kamu@email.com</p>
-      <p>WhatsApp: +62xxx</p>
-      <p>Instagram: @kamu</p>
-    </section>
+
+<section id="contact">
+  <h1>Hubungi Saya</h1>
+  <p>Jangan ragu untuk menghubungi saya melalui platform berikut:</p>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem;">
+    <a href="https://wa.me/6285173228399" target="_blank" class="contact-btn" style="--icon: url('https://cdn-icons-png.flaticon.com/512/733/733585.png')">
+      WhatsApp
+    </a>
+    <a href="skyzoo604@email.com" class="contact-btn" style="--icon: url('https://cdn-icons-png.flaticon.com/512/732/732200.png')">
+      Email
+    </a>
+    <a href="https://instagram.com/boyxiaoo" target="_blank" class="contact-btn" style="--icon: url('https://cdn-icons-png.flaticon.com/512/2111/2111463.png')">
+      Instagram
+    </a>
+    <a href="https://t.me/draa82" target="_blank" class="contact-btn" style="--icon: url('https://cdn-icons-png.flaticon.com/512/2111/2111646.png')">
+      Telegram
+    </a>
+  </div>
+</section>
   </main>
 
   <script>
     function updateModeIcon() {
-  const icon = document.getElementById('mode-icon');
-  if (document.body.classList.contains('dark-mode')) {
-    icon.src = 'https://files.catbox.moe/otr78j.png'; // Bulan
-  } else {
-    icon.src = 'https://files.catbox.moe/yqnixc.png'; // Matahari
-  }
-}
+      const icon = document.getElementById('mode-icon');
+      if (document.body.classList.contains('dark-mode')) {
+        icon.src = 'https://files.catbox.moe/otr78j.png';
+      } else {
+        icon.src = 'https://files.catbox.moe/yqnixc.png';
+      }
+    }
 
-function toggleMode() {
-  document.body.classList.toggle('dark-mode');
-  localStorage.setItem('mode', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-  updateModeIcon();
-}
+    function toggleMode() {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('mode', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+      updateModeIcon();
+    }
 
-// Load saved mode & icon
-if (localStorage.getItem('mode') === 'dark') {
-  document.body.classList.add('dark-mode');
-}
-
-    const sidebar = document.getElementById('sidebar')
-    const hamburger = document.getElementById('hamburger')
+    const sidebar = document.getElementById('sidebar');
+    const hamburger = document.getElementById('hamburger');
 
     function toggleSidebar() {
-      sidebar.classList.toggle('active')
-      hamburger.classList.toggle('open')
+      sidebar.classList.toggle('active');
+      hamburger.classList.toggle('open');
     }
 
     function showSection(id) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'))
-      document.getElementById(id).classList.add('active')
-      sidebar.classList.remove('active')
-      hamburger.classList.remove('open')
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      sidebar.classList.remove('active');
+      hamburger.classList.remove('open');
     }
 
     function updateTime() {
@@ -283,7 +389,6 @@ if (localStorage.getItem('mode') === 'dark') {
       }
     }
 
-    // Load saved mode
     if (localStorage.getItem('mode') === 'dark') {
       document.body.classList.add('dark-mode');
     }
