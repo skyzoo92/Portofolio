@@ -269,12 +269,12 @@
     <img id="mode-icon" src="https://cdn-icons-png.flaticon.com/512/4814/4814730.png" alt="Mode Icon" width="24" />
   </button>
 
-  <div class="sidebar" id="sidebar">
-    <h2>Portofolio</h2>
-    <a href="#" onclick="showSection('home')">Beranda</a>
-    <a href="#" onclick="showSection('about')">Tentang Saya</a>
-    <a href="#" onclick="showSection('contact')">Kontak</a>
-  </div>
+<div class="sidebar" id="sidebar">
+  <h2>Portofolio</h2>
+  <a href="home" onclick="navigateTo(event, 'home')">Beranda</a>
+  <a href="about" onclick="navigateTo(event, 'about')">Tentang Saya</a>
+  <a href="contact" onclick="navigateTo(event, 'contact')">Kontak</a>
+</div>
 
   <div class="status-bar">
     <span id="battery-level">Baterai: --%</span>
@@ -328,7 +328,7 @@
     <a href="https://wa.me/6285173228399" target="_blank" class="contact-btn" style="--icon: url('https://cdn-icons-png.flaticon.com/512/733/733585.png')">
       WhatsApp
     </a>
-    <a href="emailto:skyzoo604@email.com" class="contact-btn" style="--icon: url('https://cdn-icons-png.flaticon.com/512/732/732200.png')">
+    <a href="mailto:skyzoo604@email.com" class="contact-btn" style="--icon: url('https://cdn-icons-png.flaticon.com/512/732/732200.png')">
       Email
     </a>
     <a href="https://instagram.com/boyxiaoo" target="_blank" class="contact-btn" style="--icon: url('https://cdn-icons-png.flaticon.com/512/2111/2111463.png')">
@@ -365,12 +365,35 @@
       hamburger.classList.toggle('open');
     }
 
-    function showSection(id) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      sidebar.classList.remove('active');
-      hamburger.classList.remove('open');
-    }
+    // Fungsi untuk menampilkan section sesuai ID
+function showSection(id) {
+  document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+}
+
+// Fungsi untuk navigasi + update URL
+function navigateTo(event, sectionId) {
+  event.preventDefault();
+  history.pushState({}, '', sectionId);
+  showSection(sectionId);
+}
+
+// Saat halaman pertama dimuat
+window.addEventListener('DOMContentLoaded', () => {
+  let path = window.location.pathname.split('/').pop();
+  if (!path || path === 'index.html') {
+    path = 'home'; // default ke home
+    history.replaceState({}, '', 'home'); // ganti URL tanpa reload
+  }
+  showSection(path);
+});
+
+// Navigasi back/forward browser
+window.addEventListener('popstate', () => {
+  const path = window.location.pathname.split('/').pop() || 'home';
+  showSection(path);
+});
 
     function updateTime() {
       const now = new Date();
