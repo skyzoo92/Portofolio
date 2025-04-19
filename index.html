@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portofolio Saya</title>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --text: #1f2937;
+      --subtext: #4b5563;
+      --sidebar: #1f2937;
+      --link-hover: #374151;
+      --accent: #60a5fa;
+      --status-bg: #e5e7eb;
+    }
+
+    body.dark-mode {
+      --bg: #0f172a;
+      --text: #f1f5f9;
+      --subtext: #94a3b8;
+      --sidebar: #1e293b;
+      --link-hover: #334155;
+      --accent: #3b82f6;
+      --status-bg: #334155;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .sidebar-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .hamburger {
+      width: 30px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hamburger span {
+      height: 4px;
+      background: var(--text);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+   .hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+   .hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 250px;
+      height: 100%;
+      background-color: var(--sidebar);
+      color: white;
+      padding: 2rem 1rem;
+      transition: left 0.3s ease;
+      z-index: 1000;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--accent);
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin: 1rem 0;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: var(--link-hover);
+    }
+
+    .content {
+      padding: 3rem 2rem 2rem 2rem;
+    }
+
+    .content section {
+      display: none;
+    }
+
+    .content section.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .welcome {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .welcome img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+
+    .welcome h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .welcome p {
+      font-size: 1.2rem;
+      color: var(--subtext);
+    }
+
+    .status-bar {
+      position: fixed;
+      top: 10px;
+      right: 70px;
+      background: transparent;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--text);
+      transition: background 0.3s;
+    }
+    
+   .mode-toggle img {
+  transition: filter 0.3s ease;
+}
+
+    .mode-toggle {
+      position: fixed;
+      top: 1px;
+      right: 20px;
+      z-index: 1001;
+      background: transparent;
+      color: var(--text);
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <button class="sidebar-toggle" onclick="toggleSidebar()">
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </button>
+
+  <button class="mode-toggle" onclick="toggleMode()" title="Ganti Mode">
+  <img id="mode-icon" src="https://cdn-icons-png.flaticon.com/512/4814/4814730.png" alt="Mode Icon" width="24" />
+</button>
+
+  <div class="sidebar" id="sidebar">
+    <h2>Portofolio</h2>
+    <a href="#" onclick="showSection('home')">Beranda</a>
+    <a href="#" onclick="showSection('about')">Tentang Saya</a>
+    <a href="#" onclick="showSection('contact')">Kontak</a>
+  </div>
+
+  <div class="status-bar">
+    <span id="battery-level">Baterai: --%</span>
+    <span id="time">Waktu: --:--:-- WIB</span>
+  </div>
+
+  <main class="content">
+    <section id="home" class="active">
+      <div class="welcome">
+        <img src="https://files.catbox.moe/wh6fiv.jpg" alt="Foto Profil" />
+        <h1>Halo, Saya Hydra</h1>
+        <p>Selamat datang di portofolio pribadi saya. Di sini kamu bisa mengenal saya lebih jauh!</p>
+      </div>
+    </section>
+    <section id="about">
+      <h1>Tentang Saya</h1>
+      <p>Saya adalah seorang yang bersemangat dalam dunia [bidang kamu], dengan keahlian di [skill kamu]. Saya suka menciptakan sesuatu yang menarik, efisien, dan berguna.</p>
+    </section>
+    <section id="contact">
+      <h1>Kontak</h1>
+      <p>Email: kamu@email.com</p>
+      <p>WhatsApp: +62xxx</p>
+      <p>Instagram: @kamu</p>
+    </section>
+  </main>
+
+  <script>
+    function updateModeIcon() {
+  const icon = document.getElementById('mode-icon');
+  if (document.body.classList.contains('dark-mode')) {
+    icon.src = 'https://files.catbox.moe/otr78j.png'; // Bulan
+  } else {
+    icon.src = 'https://files.catbox.moe/yqnixc.png'; // Matahari
+  }
+}
+
+function toggleMode() {
+  document.body.classList.toggle('dark-mode');
+  localStorage.setItem('mode', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+  updateModeIcon();
+}
+
+// Load saved mode & icon
+if (localStorage.getItem('mode') === 'dark') {
+  document.body.classList.add('dark-mode');
+}
+
+    const sidebar = document.getElementById('sidebar')
+    const hamburger = document.getElementById('hamburger')
+
+    function toggleSidebar() {
+      sidebar.classList.toggle('active')
+      hamburger.classList.toggle('open')
+    }
+
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'))
+      document.getElementById(id).classList.add('active')
+      sidebar.classList.remove('active')
+      hamburger.classList.remove('open')
+    }
+
+    function updateTime() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('id-ID', { timeZone: 'Asia/Jakarta' });
+      document.getElementById('time').textContent = 'Waktu: ' + timeString + ' WIB';
+    }
+
+    function updateBattery() {
+      if (navigator.getBattery) {
+        navigator.getBattery().then(battery => {
+          const level = Math.round(battery.level * 100);
+          document.getElementById('battery-level').textContent = 'Baterai: ' + level + '%';
+        });
+      } else {
+        document.getElementById('battery-level').textContent = 'Baterai: Tidak didukung';
+      }
+    }
+
+    // Load saved mode
+    if (localStorage.getItem('mode') === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+    updateBattery();
+    updateModeIcon();
+  </script>
+</body>
+</html>
